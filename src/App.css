@@ -14,23 +14,10 @@
   font-size: 15px;
 }
 
-.color-grey {
-  color: rgb(91, 91, 91);
-}
 
-.flex-sb {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.flex-gap-10 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-}
+
+
 
 .relative {
   position: relative;

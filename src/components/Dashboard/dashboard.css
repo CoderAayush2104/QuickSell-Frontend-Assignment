@@ -12,7 +12,7 @@
     min-height: 100vh;
   }
   
-  .dashCardContainer {
+  .dashColumn {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,6 +25,7 @@
   .dashCardHeading {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 90%;
     margin-bottom: 10px;
   }
@@ -59,10 +60,8 @@
   color: lightslategray;
 }
  @media screen and (max-width: 768px) {
-    .dashCardContainer {
+    .dashColumn {
       width: 100%;
-
-    
     }
   } 
   

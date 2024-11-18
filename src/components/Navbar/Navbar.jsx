@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Display from "../../assets/Display.svg";
-import "./NavBar.css";
+import "./navbar.css";
 import { useSelector, useDispatch } from "react-redux";
-import { selectData } from "../../store/selectDataSlice";
+import filterData from "../../utils/filterData";
 import { updateGroup, updateOrder } from "../../store/dataSlice";
 
-const NavBar = () => {
+const Navbar = () => {
   const [displayOnClick, setDisplayOnClick] = useState(false);
   const dispatch = useDispatch();
 
@@ -29,8 +29,9 @@ const NavBar = () => {
 
   useEffect(() => {
     const ticketsData = groupValue === "user" ? { allTickets, allUser } : allTickets;
-    dispatch(selectData(groupValue, ticketsData, orderValue));
-  }, [allTickets, allUser, groupValue, orderValue, dispatch]);
+    console.log(ticketsData)
+   filterData(dispatch,groupValue, ticketsData, orderValue);
+  }, [allTickets, allUser, groupValue, orderValue]);
 
   return (
     <div className="top-header">
@@ -42,10 +43,10 @@ const NavBar = () => {
           <img src={Display} /> Display
         </button>
         {displayOnClick && (
-          <div className="dropOnClick flex-gap-10 p-10">
+          <div className="dropOnClick p-10">
             {/* Grouping Dropdown */}
-            <div className="selectGroup flex-sb">
-              <span style={{ fontSize: "14px", color: "#555B5A" }}>Grouping</span>
+            <div className="selectGroup ">
+              <span >Grouping</span>
               <select
                 value={groupValue}
                 onChange={(e) => handleGroupValue(e, true)}
@@ -60,8 +61,8 @@ const NavBar = () => {
             </div>
 
             {/* Ordering Dropdown */}
-            <div className="selectGroup flex-sb">
-              <span style={{ fontSize: "14px", color: "#555B5A" }}>Ordering</span>
+            <div className="selectGroup ">
+              <span >Ordering</span>
               <select
                 value={orderValue}
                 onChange={(e) => handleGroupValue(e, false)}
@@ -80,4 +81,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;

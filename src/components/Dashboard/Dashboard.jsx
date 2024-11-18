@@ -1,40 +1,45 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./DashBoard.css";
+import "./dashboard.css";
 import Card from "../Card/Card";
-import { fetchAllData } from "../../store/dataSlice";
 import User from "../../assets/User.svg"
 import getStatusIcon from './../../utils/getStatusIcon';
+import fetchData from "../../utils/fetchData";
+import getPriorityIcon from "../../utils/getPriorityIcon";
 
 const Dashboard = () => {
   // Get group and order values from Redux store
   const dispatch = useDispatch()
-  const { selectedData, user } = useSelector((state) => state.selectData);
-  const {group } = useSelector((state) => state.data)
   
+  const { filteredData, user,group } = useSelector((state) => state.data);
+
+
   useEffect(() => {
-    dispatch(fetchAllData()); 
-  }, [dispatch]);
-  console.log(user)
+    fetchData(dispatch)
+  }, []);
+
   return (
-    selectedData && (
+    filteredData && (
       <div className="dashContainer" >
-        {selectedData.map((element, index) => {
-          // Determine the title and value for each group in selectedData
-          const { title, value } = element[index];
-          
+        {filteredData.map((element, index) => {
+          // Determine the title and value for each group in filteredData
+          const { priority,title, value } = element[index];
+         
           return (
-            <div key={index} className="dashCardContainer" >
-              <div className="dashCardHeading flex-sb">
+            <div key={index} className="dashColumn" >
+              <div className="dashCardHeading ">
                 <div className="leftHeading ">
                   {user ? (
                     <div className="dashCardImageContainer">
                       <img src={User}/>
                     </div>
-                  ) : (
+                  ) : group === 'status' ? (
                     <>
                     {getStatusIcon(title)}
-                  
+                    </>
+                  ) : (
+                    <>
+                    {getPriorityIcon(priority)}
                     </>
                   )}
                   <span>
@@ -70,7 +75,7 @@ const Dashboard = () => {
         {/* Conditionally render Done and Canceled sections only when grouping is by status */}
         {group === 'status'  && (
           <>
-          <div className="dashCardContainer">
+          <div className="dashColumn">
           <div className="dashCardHeading ">
               <div className="leftHeading">
                 <div className="cardTitle" >
@@ -86,8 +91,8 @@ const Dashboard = () => {
                 </div>
             </div>
           </div>
-          <div className="dashCardContainer">
-          <div className="dashCardHeading flex-sb">
+          <div className="dashColumn">
+          <div className="dashCardHeading ">
               <div className="leftHeading" >
                 <div className="cardTitle" >
                   {getStatusIcon('Cancelled')}

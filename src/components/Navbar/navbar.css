@@ -3,15 +3,27 @@
     border-bottom: 1px solid black;
 }
 .selectGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 2.5px;
     width: auto;
+    gap: 10px;
+     font-size: 14px;
+     color: #555B5A
 }
+
 
 .displayButton {
     position: relative;
 }
 
 .dropOnClick {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
     position: absolute;
     width: 220px;
     background-color: #e9eaee;

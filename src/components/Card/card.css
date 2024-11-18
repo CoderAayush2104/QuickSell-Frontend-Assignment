@@ -50,7 +50,14 @@
     font-size: 12px;
     width: 100%;
 }
-
+.cardHeading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cardId{
+    color : rgb(91,91,91)
+}
 .showStatus {
     position: absolute;
     right: 0;
