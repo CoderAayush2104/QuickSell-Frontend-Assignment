@@ -1,0 +1,68 @@
+.dashContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content:flex-start;
+    flex-wrap: wrap;
+    row-gap: 40px;
+    column-gap: 20px;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+    background-color: #f4f5f8;
+    background-position: fill;
+    min-height: 100vh;
+  }
+  
+  .dashCardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    gap: 5px;
+  }
+
+  
+  .dashCardHeading {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-bottom: 10px;
+  }
+  .leftHeading,.rightHeading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .rightHeading>span:nth-child(2){
+    margin-top: -10px;
+  }
+  .dashHeading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .dashList{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  .dashCardImageContainer>img{
+    width: 30px;
+    height: 30px;
+
+  }
+.titleValue{
+  color: lightslategray;
+}
+ @media screen and (max-width: 768px) {
+    .dashCardContainer {
+      width: 100%;
+
+    
+    }
+  } 
+  

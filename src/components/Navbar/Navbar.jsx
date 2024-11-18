@@ -1,36 +1,49 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectData } from "../../store/dataSlice"
-import Display from "../../assets/Display.svg"
-import "./navbar.css"
-const Navbar = () => {
-  const dispatch = useDispatch();
+import { useEffect, useState } from "react";
+import Display from "../../assets/Display.svg";
+import "./NavBar.css";
+import { useSelector, useDispatch } from "react-redux";
+import { selectData } from "../../store/selectDataSlice";
+import { updateGroup, updateOrder } from "../../store/dataSlice";
+
+const NavBar = () => {
   const [displayOnClick, setDisplayOnClick] = useState(false);
-  const [groupValue, setGroupValue] = useState("status");
-  const [orderValue, setOrderValue] = useState("priority");
-  const allTickets = useSelector((state) => state.allTickets);
+  const dispatch = useDispatch();
+
+  // Access persisted state from Redux
+  const { allTickets, allUser, group, order } = useSelector((state) => state.data);
+
+  // Local state mirrors persisted Redux state
+  const [groupValue, setGroupValue] = useState(group);
+  const [orderValue, setOrderValue] = useState(order);
 
   const handleGroupValue = (e, isGroup) => {
     const value = e.target.value;
     if (isGroup) {
       setGroupValue(value);
+      dispatch(updateGroup(value)); // Update group in Redux state
     } else {
       setOrderValue(value);
+      dispatch(updateOrder(value)); // Update order in Redux state
     }
-    dispatch(selectData({ group: value, allTickets, orderValue }));
   };
 
+  useEffect(() => {
+    const ticketsData = groupValue === "user" ? { allTickets, allUser } : allTickets;
+    dispatch(selectData(groupValue, ticketsData, orderValue));
+  }, [allTickets, allUser, groupValue, orderValue, dispatch]);
+
   return (
-    <div className="top-header" >
-      <div className="displayButton ">
+    <div className="top-header">
+      <div className="displayButton">
         <button
           className="p-10 f-16 btn"
-          onClick={() => setDisplayOnClick(!displayOnClick)}
+          onClick={() => setDisplayOnClick((prev) => !prev)} // Toggle dropdown visibility
         >
-          <img src={Display}/> Display
+          <img src={Display} /> Display
         </button>
         {displayOnClick && (
           <div className="dropOnClick flex-gap-10 p-10">
+            {/* Grouping Dropdown */}
             <div className="selectGroup flex-sb">
               <span style={{ fontSize: "14px", color: "#555B5A" }}>Grouping</span>
               <select
@@ -45,6 +58,8 @@ const Navbar = () => {
                 <option value="priority">Priority</option>
               </select>
             </div>
+
+            {/* Ordering Dropdown */}
             <div className="selectGroup flex-sb">
               <span style={{ fontSize: "14px", color: "#555B5A" }}>Ordering</span>
               <select
@@ -65,4 +80,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;

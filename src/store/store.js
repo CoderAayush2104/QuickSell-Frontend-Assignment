@@ -1,24 +1,34 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage/session";  // Use sessionStorage for persistence
-import dataReducer from "./dataSlice";  // Import our data slice
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import dataSlice from './dataSlice';
+import selectDataSlice from './selectDataSlice';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['allTickets', 'allUser', 'selectedData'], // Specify which slices to persist
+// Persist Configurations for Reducers
+const dataPersistConfig = {
+    key: 'data',
+    storage,
+    whitelist: ['allTickets', 'allUser', 'group', 'order'], // Specify keys to persist
 };
 
-// Persist reducer
-const persistedReducer = persistReducer(persistConfig, dataReducer);
-// Configure the store with the persisted reducer
+const selectDataPersistConfig = {
+    key: 'selectData',
+    storage,
+    whitelist: ['selectedData', 'user'], // Specify keys to persist
+};
+
+// Persist Reducers
+const persistedDataReducer = persistReducer(dataPersistConfig, dataSlice);
+const persistedSelectDataReducer = persistReducer(selectDataPersistConfig, selectDataSlice);
+
+// Configure Store
 const store = configureStore({
-    reducer: persistedReducer,
-  });
+    reducer: {
+        data: persistedDataReducer,
+        selectData: persistedSelectDataReducer,
+    },
+});
 
+export const persistor = persistStore(store);
 
-// Create a persistor to sync persisted state
-const persistor = persistStore(store);
-
-// Export store and persistor for use in the app
-export { store, persistor };
+export default store;
