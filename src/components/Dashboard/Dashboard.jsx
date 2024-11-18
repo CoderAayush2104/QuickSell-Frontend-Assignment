@@ -27,7 +27,7 @@ const Dashboard = () => {
          
           return (
             <div key={index} className="dashColumn" >
-              <div className="dashCardHeading ">
+              <div className="dashColHeading ">
                 <div className="leftHeading ">
                   {user ? (
                     <div className="dashCardImageContainer">
@@ -76,7 +76,7 @@ const Dashboard = () => {
         {group === 'status'  && (
           <>
           <div className="dashColumn">
-          <div className="dashCardHeading ">
+          <div className="dashColHeading ">
               <div className="leftHeading">
                 <div className="cardTitle" >
                   {getStatusIcon('Done')}
@@ -92,7 +92,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="dashColumn">
-          <div className="dashCardHeading ">
+          <div className="dashColHeading ">
               <div className="leftHeading" >
                 <div className="cardTitle" >
                   {getStatusIcon('Cancelled')}

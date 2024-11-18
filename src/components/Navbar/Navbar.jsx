@@ -10,7 +10,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   // Access persisted state from Redux
-  const { allTickets, allUser, group, order } = useSelector((state) => state.data);
+  const { allTickets, allUsers, group, order } = useSelector((state) => state.data);
 
   // Local state mirrors persisted Redux state
   const [groupValue, setGroupValue] = useState(group);
@@ -28,10 +28,10 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const ticketsData = groupValue === "user" ? { allTickets, allUser } : allTickets;
-    console.log(ticketsData)
+    const ticketsData = groupValue === "user" ? { allTickets , allUsers } : allTickets;
+    console.log("TicketData",ticketsData)
    filterData(dispatch,groupValue, ticketsData, orderValue);
-  }, [allTickets, allUser, groupValue, orderValue]);
+  }, [allTickets, allUsers, groupValue, orderValue]);
 
   return (
     <div className="top-header">

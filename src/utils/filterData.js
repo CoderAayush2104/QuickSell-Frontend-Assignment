@@ -28,12 +28,12 @@ const filterData = async (dispatch, groupValue, allTickets, orderValue) => {
         });
       } else if (groupValue === "user") {
         user = true;
-        console.log(allTickets)
-        allTickets?.allUser?.forEach((element, index) => {
+        
+        allTickets?.allUsers?.forEach((element, index) => {
           arr = allTickets?.allTickets?.filter(
             (ticket) => element.id === ticket.userId
           );
-          console.log("Arr",arr)
+         
           filteredData.push({
             [index]: {
               title: element.name,
