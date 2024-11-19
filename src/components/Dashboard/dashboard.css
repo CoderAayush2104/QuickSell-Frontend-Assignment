@@ -1,4 +1,4 @@
-.dashContainer {
+.dash-container {
     display: flex;
     align-items: flex-start;
     justify-content:flex-start;
@@ -12,7 +12,7 @@
     min-height: 100vh;
   }
   
-  .dashColumn {
+  .dash-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,20 +22,20 @@
   }
 
   
-  .dashColHeading {
+  .dash-col-heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
     margin-bottom: 10px;
   }
-  .leftHeading,.rightHeading{
+  .left-heading,.right-heading{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
   }
-  .rightHeading>span:nth-child(2){
+  .right-heading>span:nth-child(2){
     margin-top: -10px;
   }
   .dashHeading{
@@ -44,23 +44,23 @@
     align-items: center;
 
   }
-  .dashList{
+  .dash-list{
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 10px;
   }
   
-  .dashCardImageContainer>img{
+  .dash-col-heading-image-container>img{
     width: 30px;
     height: 30px;
 
   }
-.titleValue{
+.title-value{
   color: lightslategray;
 }
  @media screen and (max-width: 768px) {
-    .dashColumn {
+    .dash-column {
       width: 100%;
     }
   } 

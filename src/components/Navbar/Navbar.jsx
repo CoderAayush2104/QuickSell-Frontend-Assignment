@@ -6,13 +6,13 @@ import filterData from "../../utils/filterData";
 import { updateGroup, updateOrder } from "../../store/dataSlice";
 
 const Navbar = () => {
-  const [displayOnClick, setDisplayOnClick] = useState(false);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const dispatch = useDispatch();
 
-  // Access persisted state from Redux
-  const { allTickets, allUsers, group, order } = useSelector((state) => state.data);
+  const { allTickets, allUsers, group, order } = useSelector(
+    (state) => state.data
+  );
 
-  // Local state mirrors persisted Redux state
   const [groupValue, setGroupValue] = useState(group);
   const [orderValue, setOrderValue] = useState(order);
 
@@ -20,37 +20,37 @@ const Navbar = () => {
     const value = e.target.value;
     if (isGroup) {
       setGroupValue(value);
-      dispatch(updateGroup(value)); // Update group in Redux state
+      dispatch(updateGroup(value));
     } else {
       setOrderValue(value);
-      dispatch(updateOrder(value)); // Update order in Redux state
+      dispatch(updateOrder(value));
     }
   };
 
   useEffect(() => {
-    const ticketsData = groupValue === "user" ? { allTickets , allUsers } : allTickets;
-    console.log("TicketData",ticketsData)
-   filterData(dispatch,groupValue, ticketsData, orderValue);
+    const ticketsData =
+      groupValue === "user" ? { allTickets, allUsers } : allTickets;
+    filterData(dispatch, groupValue, ticketsData, orderValue);
   }, [allTickets, allUsers, groupValue, orderValue]);
 
   return (
-    <div className="top-header">
-      <div className="displayButton">
+    <div className="navbar-container">
+      <div className="display-button-container">
         <button
-          className="p-10 f-16 btn"
-          onClick={() => setDisplayOnClick((prev) => !prev)} // Toggle dropdown visibility
+          className="display-button"
+          onClick={() => setIsDropdownVisible((prev) => !prev)} // Toggle dropdown visibility
         >
           <img src={Display} /> Display
         </button>
-        {displayOnClick && (
-          <div className="dropOnClick p-10">
+        {isDropdownVisible && (
+          <div className="dropdowns-container">
             {/* Grouping Dropdown */}
-            <div className="selectGroup ">
-              <span >Grouping</span>
+            <div className="select-group ">
+              <span>Grouping</span>
               <select
                 value={groupValue}
                 onChange={(e) => handleGroupValue(e, true)}
-                className="selectStyle"
+                className="select-style"
                 name="group"
                 id="group"
               >
@@ -61,12 +61,12 @@ const Navbar = () => {
             </div>
 
             {/* Ordering Dropdown */}
-            <div className="selectGroup ">
-              <span >Ordering</span>
+            <div className="select-group ">
+              <span>Ordering</span>
               <select
                 value={orderValue}
                 onChange={(e) => handleGroupValue(e, false)}
-                className="selectStyle"
+                className="select-style"
                 name="order"
                 id="order"
               >

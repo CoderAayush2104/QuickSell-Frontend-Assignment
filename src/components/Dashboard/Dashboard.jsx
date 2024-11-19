@@ -2,61 +2,47 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./dashboard.css";
 import Card from "../Card/Card";
-import User from "../../assets/User.svg"
-import getStatusIcon from './../../utils/getStatusIcon';
+import User from "../../assets/User.svg";
+import getStatusIcon from "./../../utils/getStatusIcon";
 import fetchData from "../../utils/fetchData";
 import getPriorityIcon from "../../utils/getPriorityIcon";
 
 const Dashboard = () => {
-  // Get group and order values from Redux store
-  const dispatch = useDispatch()
-  
-  const { filteredData, user,group } = useSelector((state) => state.data);
-
+  const dispatch = useDispatch();
+  const { filteredData, user, group } = useSelector((state) => state.data);
 
   useEffect(() => {
-    fetchData(dispatch)
+    fetchData(dispatch);
   }, []);
 
   return (
     filteredData && (
-      <div className="dashContainer" >
+      <div className="dash-container">
         {filteredData.map((element, index) => {
-          // Determine the title and value for each group in filteredData
-          const { priority,title, value } = element[index];
-         
+          const { priority, title, value } = element[index];
+
           return (
-            <div key={index} className="dashColumn" >
-              <div className="dashColHeading ">
-                <div className="leftHeading ">
+            <div key={index} className="dash-column">
+              <div className="dash-col-heading ">
+                <div className="left-heading ">
                   {user ? (
-                    <div className="dashCardImageContainer">
-                      <img src={User}/>
+                    <div className="dash-col-heading-image-container">
+                      <img src={User} />
                     </div>
-                  ) : group === 'status' ? (
-                    <>
-                    {getStatusIcon(title)}
-                    </>
+                  ) : group === "status" ? (
+                    <>{getStatusIcon(title)}</>
                   ) : (
-                    <>
-                    {getPriorityIcon(priority)}
-                    </>
+                    <>{getPriorityIcon(priority)}</>
                   )}
-                  <span>
-                    {title} 
-                  </span>
-                  <span className="titleValue">
-                  {value?.length}
-                  </span>
+                  <span>{title}</span>
+                  <span className="title-value">{value?.length}</span>
                 </div>
-                <div className="rightHeading">
-                  <span>
-                  +
-                  </span>
-                   <span>...</span>
+                <div className="right-heading">
+                  <span>+</span>
+                  <span>...</span>
                 </div>
               </div>
-              <div className="dashList ">
+              <div className="dash-list ">
                 {value?.map((ticket, ind) => (
                   <Card
                     key={ticket.id}
@@ -71,44 +57,32 @@ const Dashboard = () => {
             </div>
           );
         })}
-        
-        {/* Conditionally render Done and Canceled sections only when grouping is by status */}
-        {group === 'status'  && (
+        {group === "status" && (
           <>
-          <div className="dashColumn">
-          <div className="dashColHeading ">
-              <div className="leftHeading">
-                <div className="cardTitle" >
-                  {getStatusIcon('Done')}
+            <div className="dash-column">
+              <div className="dash-col-heading ">
+                <div className="left-heading">
+                  <div className="card-title">{getStatusIcon("Done")}</div>
+                  <span>Done</span> <span className="title-value">0</span>
                 </div>
-                <span >Done</span> <span className="titleValue">0</span>
+                <div className="right-heading">
+                  <span>+</span>
+                  <span>...</span>
+                </div>
               </div>
-              <div className="rightHeading">
-                  <span>
-                  +
-                  </span>
-                   <span>...</span>
-                </div>
             </div>
-          </div>
-          <div className="dashColumn">
-          <div className="dashColHeading ">
-              <div className="leftHeading" >
-                <div className="cardTitle" >
-                  {getStatusIcon('Cancelled')}
+            <div className="dash-column">
+              <div className="dash-col-heading ">
+                <div className="left-heading">
+                  <div className="card-title">{getStatusIcon("Cancelled")}</div>
+                  <span>Cancelled</span> <span className="title-value">0</span>
                 </div>
-                <span >Cancelled</span> <span className="titleValue">0</span>
+                <div className="right-heading">
+                  <span>+</span>
+                  <span>...</span>
+                </div>
               </div>
-              <div className="rightHeading">
-                  <span>
-                  +
-                  </span>
-                   <span>...</span>
-                </div>
             </div>
-          </div>
-           
-           
           </>
         )}
       </div>

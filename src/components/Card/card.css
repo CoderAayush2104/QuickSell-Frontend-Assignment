@@ -1,4 +1,4 @@
-.cardContainer {
+.card-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -17,7 +17,7 @@
     /* Adjusted padding for smaller screens */
     box-shadow: #f4f5f8;
 }
-.cardTitle{
+.card-title{
    
     display: flex;
     justify-content: flex-start;
@@ -27,7 +27,7 @@
     
 
 }
-.cardTitle>span{
+.card-title>span{
     display: flex;
     align-items: center;
     height: 100%;
@@ -36,26 +36,26 @@
    
 }
 
-.imageContainer{
+.image-container{
     position: absolute;
     top: 16px;
     right: 16px;
    
 }
-.imageContainer>img{
+.image-container>img{
     width: 30px;
     height: 30px;
 }
-.cardContainer>* {
+.card-container>* {
     font-size: 12px;
     width: 100%;
 }
-.cardHeading{
+.card-heading{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.cardId{
+.card-id{
     color : rgb(91,91,91)
 }
 .showStatus {
@@ -84,7 +84,7 @@
     line-height: 20px;
 }
 
-.cardTags {
+.card-tags {
     align-items: center;
     font-size: smaller;
     display: flex;
@@ -94,7 +94,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .cardContainer {
+    .card-container {
         padding: 5%;
         /* Adjusted padding for larger screens */
     }

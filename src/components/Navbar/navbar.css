@@ -1,8 +1,8 @@
-.top-header{
+.navbar-container{
     padding: 10px;
     border-bottom: 1px solid black;
 }
-.selectGroup {
+.select-group {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,47 +14,58 @@
 }
 
 
-.displayButton {
+.display-button-container {
     position: relative;
 }
 
-.dropOnClick {
+.dropdowns-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 10px;
     position: absolute;
+    padding: 5px 10px;
     width: 220px;
     background-color: #e9eaee;
     border-radius: 8px;
     margin-top: 11px;
     z-index: 10;
+    animation: slideDown 0.25s ease-in-out;
 }
-
-.dropOnClick>* {
+@keyframes slideUp{
+    0% {
+        transform: translateY(0px);
+    }
+    100%{
+        transform: translateY(-20px);
+        display: none;
+    }
+}
+@keyframes slideDown{
+    0% {
+        transform: translateY(-20px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+.dropdowns-container>* {
     width: 100%;
 }
 
-.btn {
+.display-button {
+    padding: 5px 10px;
+    font-size: 15px;
     background: #ffffff;
     border: 2px solid #c1c1c1;
     border-radius: 5px;
 }
 
-.selectStyle {
+.select-style {
     width: 100px;
     border-radius: 5px;
     background: white;
     padding: 2px 5px;
 }
 
-/* Responsive Styles */
-@media only screen and (max-width: 768px) {
-    .dropOnClick {
-        width: 100%;
-        /* Adjust the width for smaller screens */
-        max-width: 300px;
-        /* Set a maximum width if needed */
-    }
-}
